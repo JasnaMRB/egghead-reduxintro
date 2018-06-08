@@ -1,5 +1,3 @@
-// ES6 default value syntax: state = 0
-// Or, `if (state === 'undefined') state = 0` since this means it's the initial state of the reducer
 const counter = (state = 0, action) => {
     switch (action.type) {
       case 'INCREMENT':
