@@ -1,39 +1,17 @@
+// the reducer
 const counter = (state = 0, action) => {
     switch (action.type) {
-      case 'INCREMENT':
-        return state + 1;
-      case 'DECREMENT':
-        return state - 1;
-    // If something else is returned, convention is to return whatever the previous state would've returned
-      default:
-        return state;
+        case 'INCREMENT':
+            return state + 1;
+        case 'DECREMENT':
+            return state - 1;
+        // If something else is returned, convention is to return whatever the previous state would've returned
+        default:
+            return state;
     }
-  }
+};
 
-expect(
-    counter(0, { type: 'INCREMENT' })
-).toEqual(1)
-
-expect(
-    counter(1, { type: 'INCREMENT' })
-).toEqual(2)
-
-expect(
-    counter(2, { type: 'DECREMENT' })
-).toEqual(1)
-
-expect(
-    counter(1, { type: 'DECREMENT' })
-).toEqual(0)
-
-expect(
-    counter(1, { type: 'SOMETHING_ELSE' }) 
-  ).toEqual(1);
-  
-
-console.log('Tests passed!') 
-
-const { createStore } = Redux; 
+const { createStore } = Redux;
 // destructuring ^; aka
 // var createStore = Redux.createStore;
 // aka, using npm
@@ -45,19 +23,51 @@ const store = createStore(counter);
 
 console.log(store.getState()); // runs current state of Redux store; 0
 
-store.dispatch({ type: 'INCREMENT'}); // most commonly used store method; dispatches actions to change state
+store.dispatch({ type: 'INCREMENT' }); // most commonly used store method; dispatches actions to change state
 console.log(store.getState());
 
-const render = () => {
+// a React component
+// it's "dumb"; no business logic
+const Counter = ({
+    value,
+    onIncrement,
+    onDecrement
+  }) => (
+    <div>
+      <h1>{value}</h1>
+      <button onClick={onIncrement}>+</button>
+      <button onClick={onDecrement}>-</button>
+    </div>
+  );
+
+// render without React; compare to `render`
+const renderPlain = () => {
     document.body.innerText = store.getState();
-}
+};
+
+// render with React
+const render = () => {
+    ReactDOM.render(
+        <Counter value={store.getState()} 
+        onIncrement={() =>
+            store.dispatch({
+                type: 'INCREMENT'
+            }) 
+        }
+        onDecrement={() => 
+            store.dispatch({
+                type: 'DECREMENT'
+            })
+        }
+        />,
+        document.getElementById('root')
+    )
+};
+
 // registers callback that Store calls when an action is dispatched
+// whenever the store changes, call `render`
 store.subscribe(render);
 
 
 // On load
 render();
-
-document.addEventListener('click', () => {
-    store.dispatch({ type: 'INCREMENT' });
-});
