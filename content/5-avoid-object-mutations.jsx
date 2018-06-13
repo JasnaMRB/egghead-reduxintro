@@ -1,6 +1,6 @@
 // flips to-do completed/not
 const toggleTodo = (todo) => {
-    
+
     // Hard to maintain; if you add new properties, you have to remember to put them here too
     // ------
     //return {
@@ -35,7 +35,7 @@ const testToggleTodo = () => {
     };
 
     const todoAfter = {
-        id: 0, 
+        id: 0,
         text: 'Learn Redux',
         completed: true
     };

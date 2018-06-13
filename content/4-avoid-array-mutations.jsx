@@ -1,8 +1,8 @@
 const addCounter = (list) => {
-    
+
     // BAD: modifies original array
-        // list.push(0);
-        // return list;
+    // list.push(0);
+    // return list;
 
     // Fine:
     // return list.concat([0]);
@@ -17,8 +17,8 @@ const testAddCounter = () => {
     const listAfter = [0];
 
     // `deepFreeze` enforces immutability 
-    deepFreeze(listBefore); 
-    
+    deepFreeze(listBefore);
+
     expect(
         addCounter(listBefore)
     ).toEqual(listAfter);
@@ -26,9 +26,9 @@ const testAddCounter = () => {
 
 const removeCounter = (list, index) => {
     // BAD: modifies original array
-        // list.splice(index, 1);
-        // return list;
-    
+    // list.splice(index, 1);
+    // return list;
+
     // `List.slice(a, b)` returns a List from index a to index b
     // Here, get beginning of list to specified index, 
     // then concat with list from specified index +1 to the end
@@ -38,10 +38,10 @@ const removeCounter = (list, index) => {
     //     .slice(0, index)
     //     .concat(List.slice(index + 1))
 
-   // With ES6, spread operator again
-   return [
-       ...list.slice(0, index),
-       ...list.slice(index + 1)
+    // With ES6, spread operator again
+    return [
+        ...list.slice(0, index),
+        ...list.slice(index + 1)
     ];
 };
 
@@ -49,7 +49,7 @@ const testRemoveCounter = () => {
     const listBefore = [0, 10, 20];
     const listAfter = [0, 20];
 
-    deepFreeze(listBefore); 
+    deepFreeze(listBefore);
 
     expect(
         removeCounter(listBefore, 1)
@@ -66,7 +66,7 @@ const incrementCounter = (list, index) => {
     //    .slice(0, index)
     //    .concat(list[index] + 1)
     //    .concat(list.slice(index + 1));
-    
+
     // immutable ES6
     return [
         ...list.slice(0, index),

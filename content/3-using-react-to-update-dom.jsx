@@ -32,13 +32,13 @@ const Counter = ({
     value,
     onIncrement,
     onDecrement
-  }) => (
-    <div>
-      <h1>{value}</h1>
-      <button onClick={onIncrement}>+</button>
-      <button onClick={onDecrement}>-</button>
-    </div>
-  );
+}) => (
+        <div>
+            <h1>{value}</h1>
+            <button onClick={onIncrement}>+</button>
+            <button onClick={onDecrement}>-</button>
+        </div>
+    );
 
 // render without React; compare to `render`
 const renderPlain = () => {
@@ -48,17 +48,17 @@ const renderPlain = () => {
 // render with React
 const render = () => {
     ReactDOM.render(
-        <Counter value={store.getState()} 
-        onIncrement={() =>
-            store.dispatch({
-                type: 'INCREMENT'
-            }) 
-        }
-        onDecrement={() => 
-            store.dispatch({
-                type: 'DECREMENT'
-            })
-        }
+        <Counter value={store.getState()}
+            onIncrement={() =>
+                store.dispatch({
+                    type: 'INCREMENT'
+                })
+            }
+            onDecrement={() =>
+                store.dispatch({
+                    type: 'DECREMENT'
+                })
+            }
         />,
         document.getElementById('root')
     )
