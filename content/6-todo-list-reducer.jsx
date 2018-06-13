@@ -47,11 +47,6 @@ const testAddTodo = () => {
     ).toEqual(stateAfter);
 }
 
-
-const toggleTodo = () => {
-
-};
-
 const testToggleTodo = () => {
     const stateBefore = [
         {
